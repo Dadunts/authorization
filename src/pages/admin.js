@@ -12,6 +12,7 @@ const Admin = () => {
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Admin page
+            
           </Typography>
           <Button onClick={() => handleLogout(navigate)} color="inherit">Log out</Button>
         </Toolbar>
