@@ -1,29 +1,38 @@
 import { TextField, Box, Typography, Button, Container } from "@mui/material";
+import { logIn } from "../utils/logIn";
+import { useNavigate } from "react-router-dom";
 
 const inputs = [
   {
     id: "email",
     label: "Email Address",
     type: "email",
+    name: "email",
   },
   {
     id: "password",
     label: "Password",
     type: "password",
+    name: "password",
   },
 ];
-const SignIn = () => {
+
+const SignIn = ({ setIsLoggedIn, setIsAdmin }) => {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    logIn(
+      data.get("email"),
+      data.get("password"),
+      setIsLoggedIn,
+      setIsAdmin,
+      navigate
+    );
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -32,10 +41,8 @@ const SignIn = () => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Typography variant="h5">Sign in</Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           {inputs.map((value, idx) => (
             <TextField
               key={value.label + idx}
@@ -44,22 +51,18 @@ const SignIn = () => {
               fullWidth
               id={value.id}
               label={value.label}
-              type={value.label}
+              name={value.name}
+              type={value.type}
               autoFocus
             />
           ))}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
             Sign In
           </Button>
         </Box>
       </Box>
     </Container>
   );
-}
+};
 
-export default SignIn
+export default SignIn;
