@@ -17,7 +17,7 @@ const inputs = [
   },
 ];
 
-const SignIn = ({ setIsLoggedIn, setIsAdmin }) => {
+const SignIn = ({ setIsLoggedIn, setRole }) => {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ const SignIn = ({ setIsLoggedIn, setIsAdmin }) => {
       data.get("email"),
       data.get("password"),
       setIsLoggedIn,
-      setIsAdmin,
+      setRole,
       navigate
     );
   };

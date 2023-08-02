@@ -1,13 +1,13 @@
 import { adminCredentials, userCredentials } from "../utils/credentials";
 
-export const logIn = (email, password, setIsLoggedIn, setIsAdmin, navigate) => {
-    if (
+export const logIn = (email, password, setIsLoggedIn, setRole, navigate) => {
+  if (
     email === adminCredentials.email &&
     password === adminCredentials.password
   ) {
     console.log("Logged in as admin.");
     setIsLoggedIn(true);
-    setIsAdmin('admin');
+    setRole("admin");
     navigate("/admin", { replace: true });
 
     return;
@@ -23,13 +23,13 @@ export const logIn = (email, password, setIsLoggedIn, setIsAdmin, navigate) => {
   ) {
     console.log("Logged in as user:", user.email);
     setIsLoggedIn(true);
-    setIsAdmin('user');
+    setRole("user");
     navigate("/", { replace: true });
 
     return;
   }
   setIsLoggedIn(false);
-  setIsAdmin('');
+  setRole("");
 
   console.log("Login failed. Invalid credentials.");
 };
